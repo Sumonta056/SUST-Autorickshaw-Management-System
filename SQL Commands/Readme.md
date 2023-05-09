@@ -25,7 +25,7 @@ CREATE DATABASE SUST_AUTO_RICKSHAW_MANGEMENT_SYSTEM
 ```
 
 
-## Creating a student table wit data and data types
+## Creating a student table with data and data types
 
 ```bash
 CREATE TABLE Student(
