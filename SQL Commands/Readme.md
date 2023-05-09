@@ -128,3 +128,58 @@ WHERE Roll = 102;
 DELETE FROM studentinfo
 WHERE Roll = 103;
 ```
+
+<hr>
+
+### Consider the following Banking Database
+
+- branch(branch name, branch city, assets)
+- customer(customer name, customer street, customer city)
+- loan(loan number, brach name, amount)
+- borrower(customer name, loan number)
+- account(account number, branch name, balance)
+- depositor(customer name, account number)
+
+##### Find the names of all branched located in “Dhaka”
+
+```bash
+SELECT branch_Name 
+FROM branch
+WHERE branch_city = “Dhaka”; 
+```
+
+##### Find the names of all borrowers who have a loan in branch “Mirpur”
+
+```bash
+SELECT customer_name
+FROM Borrower, Loan 
+WHERE Borrower.loan_number = loan.loan_number 
+and branch_name = “Mirpur”;
+```
+
+##### Find all loan numbers with a loan value greater than BDT100,000
+
+```bash
+SELECT loan_number 
+FROM loan
+WHERE amount > 100000;
+```
+
+##### Find the names of all depositors who have an account with a value greater than BDT60,000. 
+
+```bash
+SELECT customer_name
+FROM depositor, account
+WHERE account.account_number = depositor.account_number 
+and balance > 60000;
+```
+
+##### Find the names of all depositors who have an account with a value greater than BDT60,000 at the “Motejheel” branch. 
+
+```bash
+SELECT customer_name
+FROM depositor, account
+WHERE account.account_number = depositor.account_number 
+and balance > 60000
+and branch_city = “Motejheel”; 
+```
