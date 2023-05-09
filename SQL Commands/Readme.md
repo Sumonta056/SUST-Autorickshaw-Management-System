@@ -129,6 +129,52 @@ DELETE FROM studentinfo
 WHERE Roll = 103;
 ```
 
+## Add Foreign Key
+```bash
+ // The "PersonID" column in the "Persons" table is the PRIMARY KEY in the "Persons" table.
+ // The "PersonID" column in the "Orders" table is a FOREIGN KEY in the "Orders" table.
+
+ CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+```
+
+## AND, OR and NOT Operators
+```bash
+SELECT * FROM Customers
+WHERE Country = 'Germany' AND City = 'Berlin';
+```
+```bash
+// if any of the conditions separated by OR is TRUE.
+
+SELECT * FROM Customers
+WHERE City = 'Berlin' OR City = 'Stuttgart';
+```
+
+```bash
+// if the condition(s) is NOT TRUE.
+
+SELECT * FROM Customers
+WHERE NOT Country = 'Germany';
+``` 
+
+## CHECK on CREATE TABLE
+```bash
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+CHECK (Age>=18)
+```
+
+
+
+
 <hr>
 
 ### Consider the following Banking Database
@@ -165,7 +211,7 @@ FROM loan
 WHERE amount > 100000;
 ```
 
-##### Find the names of all depositors who have an account with a value greater than BDT60,000. 
+##### Find the names of all depositors who have an account with a value greater than BDT60,000
 
 ```bash
 SELECT customer_name
@@ -174,7 +220,7 @@ WHERE account.account_number = depositor.account_number
 and balance > 60000;
 ```
 
-##### Find the names of all depositors who have an account with a value greater than BDT60,000 at the “Motejheel” branch. 
+##### Find the names of all depositors who have an account with a value greater than BDT60,000 at the “Motejheel” branch
 
 ```bash
 SELECT customer_name
