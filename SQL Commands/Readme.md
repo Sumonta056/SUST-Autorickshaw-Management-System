@@ -126,5 +126,5 @@ WHERE Roll = 102;
 
 ```bash
 DELETE FROM studentinfo
-WHERE Roll 103;
+WHERE Roll = 103;
 ```
