@@ -229,3 +229,6 @@ WHERE account.account_number = depositor.account_number
 and balance > 60000
 and branch_city = “Motejheel”; 
 ```
+
+
+
