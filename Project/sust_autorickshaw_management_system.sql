@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 07:01 PM
+-- Generation Time: May 23, 2023 at 08:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -195,9 +195,25 @@ CREATE TABLE `round` (
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `round_area` varchar(30) DEFAULT NULL,
-  `autorickshaw_number` int(11) DEFAULT NULL,
   `manager_nid` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `round`
+--
+
+INSERT INTO `round` (`round_number`, `round_date`, `start_time`, `end_time`, `round_area`, `manager_nid`) VALUES
+(1, '2023-04-03', '08:10:00', '10:40:00', 'Ladies Hall', '3762324990'),
+(2, '2023-04-03', '10:40:00', '14:00:00', 'Bangabandhu Hall', '9474232550'),
+(3, '2023-04-03', '14:56:00', '17:00:00', 'E Building', '5299322300'),
+(51, '2023-04-21', '08:00:00', '11:00:00', 'Bangabandhu Hall', '9474232550'),
+(52, '2023-04-21', '11:15:00', '14:20:00', 'Ladies Hall', '3762324990'),
+(53, '2023-04-21', '14:30:00', '17:10:00', 'E Building', '3762324990'),
+(54, '2023-04-21', '17:18:00', '19:30:00', 'Bangabandhu Hall', '3762324990'),
+(71, '2023-04-03', '08:00:00', '10:00:00', 'E Building', '5299322300'),
+(72, '2023-04-23', '10:30:00', '12:00:00', 'Ladies Hall', '5299322300'),
+(73, '2023-04-23', '12:05:00', '15:20:00', 'E Building', '5299322300'),
+(74, '2023-04-23', '15:30:00', '17:00:00', 'Bangabandhu Hall', '9474232550');
 
 -- --------------------------------------------------------
 
@@ -210,9 +226,26 @@ CREATE TABLE `serial` (
   `serial_time` time DEFAULT NULL,
   `serial_date` date DEFAULT NULL,
   `serial_status` varchar(10) DEFAULT NULL,
-  `round_number` int(11) DEFAULT NULL,
-  `manager_nid` varchar(15) DEFAULT NULL
+  `autorickshaw_number` int(11) DEFAULT NULL,
+  `round_number` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `serial`
+--
+
+INSERT INTO `serial` (`serial_number`, `serial_time`, `serial_date`, `serial_status`, `autorickshaw_number`, `round_number`) VALUES
+(62, '09:00:00', '2023-04-21', 'Absent', 40, 51),
+(53, '11:55:00', '2023-04-21', 'Present', 18, 52),
+(38, '15:30:00', '2023-04-21', 'Present', 7, 53),
+(56, '17:38:00', '2023-04-21', 'Absent', 51, 3),
+(25, '09:10:00', '2023-04-03', 'Present', 47, 1),
+(65, '12:40:00', '2023-04-03', 'Absent', 32, 2),
+(33, '14:06:00', '2023-04-03', 'Present', 52, 3),
+(40, '08:30:00', '2023-04-03', 'Absent', 17, 71),
+(31, '10:30:00', '2023-04-23', 'Present', 33, 72),
+(64, '12:55:00', '2023-04-23', 'Present', 56, 71),
+(65, '15:30:00', '2023-04-23', 'Absent', 30, 2);
 
 --
 -- Indexes for dumped tables
@@ -262,15 +295,14 @@ ALTER TABLE `permission`
 --
 ALTER TABLE `round`
   ADD PRIMARY KEY (`round_number`),
-  ADD KEY `autorickshaw_number` (`autorickshaw_number`),
   ADD KEY `manager_nid` (`manager_nid`);
 
 --
 -- Indexes for table `serial`
 --
 ALTER TABLE `serial`
-  ADD KEY `round_number` (`round_number`),
-  ADD KEY `manager_nid` (`manager_nid`);
+  ADD KEY `autorickshaw_number` (`autorickshaw_number`),
+  ADD KEY `round_number` (`round_number`);
 
 --
 -- Constraints for dumped tables
@@ -299,15 +331,14 @@ ALTER TABLE `permission`
 -- Constraints for table `round`
 --
 ALTER TABLE `round`
-  ADD CONSTRAINT `round_ibfk_1` FOREIGN KEY (`autorickshaw_number`) REFERENCES `autorickshaw` (`autorickshaw_number`),
-  ADD CONSTRAINT `round_ibfk_2` FOREIGN KEY (`manager_nid`) REFERENCES `manager` (`manager_nid`);
+  ADD CONSTRAINT `round_ibfk_1` FOREIGN KEY (`manager_nid`) REFERENCES `manager` (`manager_nid`);
 
 --
 -- Constraints for table `serial`
 --
 ALTER TABLE `serial`
-  ADD CONSTRAINT `serial_ibfk_1` FOREIGN KEY (`round_number`) REFERENCES `round` (`round_number`),
-  ADD CONSTRAINT `serial_ibfk_2` FOREIGN KEY (`manager_nid`) REFERENCES `manager` (`manager_nid`);
+  ADD CONSTRAINT `serial_ibfk_1` FOREIGN KEY (`autorickshaw_number`) REFERENCES `autorickshaw` (`autorickshaw_number`),
+  ADD CONSTRAINT `serial_ibfk_2` FOREIGN KEY (`round_number`) REFERENCES `round` (`round_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

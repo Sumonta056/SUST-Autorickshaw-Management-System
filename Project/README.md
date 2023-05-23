@@ -83,10 +83,7 @@ create table Round(
     start_time time,
     end_time time,
     round_area varchar(30),
-    
-    autorickshaw_number int,
-    FOREIGN key(autorickshaw_number) REFERENCES autorickshaw(autorickshaw_number),
-    
+
     manager_nid varchar(15),
     FOREIGN key(manager_nid) REFERENCES manager(manager_nid)
 );
@@ -98,13 +95,14 @@ create table Serial(
     serial_time time, 
     serial_date date,
     serial_status varchar(10),
+
+    autorickshaw_number int,
+    FOREIGN key(autorickshaw_number) REFERENCES autorickshaw(autorickshaw_number),
     
     round_number int,
-    FOREIGN key(round_number) REFERENCES round(round_number),
-    
-    manager_nid varchar(15),
-    FOREIGN key(manager_nid) REFERENCES manager(manager_nid)
+    FOREIGN key(round_number) REFERENCES round(round_number)
 );
+
 ```
 
 #### Inserting Owner Data
@@ -195,6 +193,43 @@ VALUES
   ('5299322300', 'Zaman Chowdhury', 'SUST, Sylhet', '1985-01-01');
 
 ```
+#### Inserting Round Data
+```code
+
+INSERT INTO round (round_number, round_date, start_time, end_time,round_area, manager_nid)
+VALUES
+  (51,  '2023-04-21', '08:00:00', '11:00:00', 'Bangabandhu Hall','9474232550'),
+  (52,  '2023-04-21', '11:15:00', '14:20:00', 'Ladies Hall', '3762324990'),
+  (53,  '2023-04-21', '14:30:00', '17:10:00', 'E Building','3762324990'),
+  (54,  '2023-04-21', '17:18:00', '19:30:00', 'Bangabandhu Hall','3762324990'),
+  (01,  '2023-04-03', '08:10:00', '10:40:00', 'Ladies Hall', '3762324990'),
+  (02,  '2023-04-03', '10:40:00', '14:00:00', 'Bangabandhu Hall', '9474232550'),
+  (03,  '2023-04-03', '14:56:00', '17:00:00', 'E Building','5299322300'),
+  (71,  '2023-04-03', '08:00:00', '10:00:00', 'E Building','5299322300'),
+  (72,  '2023-04-23', '10:30:00', '12:00:00', 'Ladies Hall','5299322300'),
+  (73,  '2023-04-23', '12:05:00', '15:20:00', 'E Building', '5299322300'),
+  (74,  '2023-04-23', '15:30:00', '17:00:00', 'Bangabandhu Hall', '9474232550');
+```
+
+
+#### Inserting Serial Data
+```code
+
+INSERT INTO serial (serial_number, serial_time, serial_date, serial_status, autorickshaw_number, round_number)
+VALUES
+  (62, '09:00:00', '2023-04-21', 'Absent', 40, 51),
+  (53, '11:55:00', '2023-04-21', 'Present', 18, 52),
+  (38, '15:30:00', '2023-04-21', 'Present', 7, 53),
+  (56, '17:38:00', '2023-04-21', 'Absent', 51, 3),
+  (25, '09:10:00', '2023-04-03', 'Present', 47, 1),
+  (65, '12:40:00', '2023-04-03', 'Absent', 32, 2),
+  (33, '14:06:00', '2023-04-03', 'Present', 52, 3),
+  (40, '08:30:00', '2023-04-03', 'Absent', 17, 71),
+  (31, '10:30:00', '2023-04-23', 'Present', 33, 72),
+  (64, '12:55:00', '2023-04-23', 'Present', 56, 71),
+  (65, '15:30:00', '2023-04-23', 'Absent', 30, 2);
+
+```
 
 
 #### Query - 1 : Sort Owner based on Dateofbirth
@@ -206,7 +241,7 @@ ORDER BY  owner_date_of_birth;
 
 ```
 
-#### Query - 2 : AutoRickshaw details of owner Name Md.Selim Reza
+#### Query - 2 : Autorickshaw details of owner Name Md.Selim Reza
 ```code
 
 SELECT *
@@ -214,4 +249,59 @@ FROM owner
 ORDER BY  owner_date_of_birth;
 
 ```
+
+#### Query - 3 : Owner and Authority who gave permission to autorickshaw number 7
+```code
+
+SELECT autorickshaw.autorickshaw_number , owner.owner_name , authority.authority_name
+FROM autorickshaw,owner,authority,permission
+WHERE autorickshaw.autorickshaw_number = 7 and owner.owner_nid = autorickshaw.owner_nid and permission.autorickshaw_number = autorickshaw.autorickshaw_number
+and permission.authority_id = authority.authority_id ;
+
+```
+
+#### Query - 4 : Info of driver whose addres is Akhalia, Sylhet
+```code
+
+SELECT *
+FROM driver
+WHERE driver_address = 'Akhalia, Sylhet' ;
+```
+
+#### Query - 5 : Count the number of driver from Akhalia, Sylhet
+```code
+
+SELECT count(driver_name)
+FROM driver
+WHERE driver_address = 'Akhalia, Sylhet' ;
+
+```
+
+#### Query - 6 : In serial table , there are how many autorickshaw whose owner = Md.Selim Reza
+
+```code
+
+SELECT COUNT(serial.autorickshaw_number)
+FROM serial , autorickshaw , owner
+WHERE autorickshaw.autorickshaw_number = serial.autorickshaw_number and owner.owner_nid = autorickshaw.owner_nid and 
+owner.owner_name = 'Md.Selim Reza' ;
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
