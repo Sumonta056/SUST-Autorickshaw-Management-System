@@ -24,7 +24,7 @@ create table Autorickshaw(
     autorickshaw_model varchar(30),
     autorickshaw_color varchar(20),
     
-    owner_nid int,
+    owner_nid varchar(15),
     foreign key (owner_nid) REFERENCES owner(owner_nid)
 );
 ```
@@ -109,29 +109,90 @@ create table Serial(
 
 #### Inserting Owner Data
 ```code
-INSERT INTO owner
+INSERT INTO Owner (owner_nid, owner_name, owner_address, owner_date_of_birth)
 VALUES
-(6877807200,    'Md.Selim Reza',			'Sust, Sylhet',				'1963-04-11'),
-(6877807201,    'Md. Oman Sani',			'Staff, Sylhet',			'1962-02-12'),
-(6877807202,    'Shekh Azizur Rahaman',		'Sust, Sylhet', 			'1968-01-19'),
-(6877807203,	'Md. Shawon Rahaman',		'Modina Market, Sylhet',	'1970-01-21'),
-(6877807204,	'Md. Mofizur Rahaman' ,		'Sust, Sylhet',				'1968-01-19'),
-(6877807205,	'Nazim Uddin',	     		'Ambarkhana, Sylhet',		'1975-11-08'),
-(6877807206,	'Md. Sayed Ahmed',			'Modina Market, Sylhet',	'1978-06-28'),
-(6877807207,	'Md. Alomgir Hossain' ,		'Sust, Sylhet',				'1965-07-29'),
-(6877807208,	'Shekh Mostofa Kamal' ,		'Akhalia, Sylhet',			'1980-11-09'),
-(6877807209,	'Belal Khan',				'Staff, Sylhet',			'1971-10-14'),
-(6877807210,	'Abdul Moyeen Khan' ,		'Akhalia, Sylhet',			'1973-01-10');
+    (6877807200, 'Md.Selim Reza', 'Sust, Sylhet', '1963-04-11'),
+    (6877807201, 'Md. Oman Sani', 'Staff, Sylhet', '1962-02-12'),
+    (6877807202, 'Shekh Azizur Rahaman', 'Sust, Sylhet', '1968-01-19'),
+    (6877807203, 'Md. Shawon Rahaman', 'Modina Market, Sylhet', '1970-01-21'),
+    (6877807206, 'Md. Sayed Ahmed', 'Modina Market, Sylhet', '1978-06-28'),   
+```
+
+
+#### Inserting Autorickshaw Data
+```code
+
+INSERT INTO autorickshaw (autorickshaw_number, autorickshaw_company, autorickshaw_color, autorickshaw_model, owner_nid)
+VALUES
+(40, 'Shotota Enterprise', 'Mahindra Mini', 'red', '6877807200');
+(18, 'Sadia Enterprise', 'TVS King', 'blue', '6877807201');
+(7, 'Sadia Enterprise', 'TVS King', 'green', '6877807202');
+(51, 'Ma Enterprise', 'TVS King', 'green', '6877807203');
+(47, 'Shotota Enterprise', 'Mahindra Mini', 'blue', '6877807201');
+(32, 'Shotota Enterprise', 'Mahindra Mini', 'red', '6877807201');
+(52, 'Ma Enterprise', 'Porag', 'red', '6877807206');
+(17, 'Ma Enterprise', 'Porag', 'blue', '6877807200');
+(33, 'Mayer Doa Enterprise', 'TVS King', 'red', '6877807203');
+(56, 'Shotota Enterprise', 'Mahindra Mini', 'green', '6877807203');
+(30, 'Sadia Enterprise', 'porag', 'blue', '6877807203');
+
 
 ```
 
 #### Inserting Driver Data
 ```code
-
-INSERT INTO driver
+INSERT INTO driver (driver_nid, driver_name, driver_address, driver_date_of_birth, autorickshaw_number)
 VALUES
-(6877807895,'Dulal Miya','Akhaliya','1990-04-12',40);
+  ('3762328990', 'Dulal Mia', 'Akhalia, Sylhet', '1963-04-11', 40),
+  ('3372328999', 'Hasan Ahmed', 'Fulbari, Sylhet', '1962-12-10', 18),
+  ('8229191111', 'Abbir Hossain', 'Akhalia, Sylhet', '1964-04-15', 7),
+  ('3427688883', 'Tareq Mia', 'Fulbari, Sylhet', '1981-04-20', 30),
+  ('5474232556', 'Ismail Hossain', 'Akhalia, Sylhet', '1963-06-17', 51),
+  ('6592324244', 'Ahsan Haque', 'Modina Market, Sylhet', '1985-09-11', 47),
+  ('7975644334', 'Rezaul Karim', 'Kalibari, Sylhet', '1964-02-13', 32),
+  ('6565784979', 'Md. Ikbal Hossain', 'Modina Market, Sylhet', '1963-11-11', 52),
+  ('7777533547', 'Md. Alomgir Hossain', 'SUST, Sylhet', '1973-10-29', 17),
+  ('9821903083', 'Faruk Mia', 'Akhalia, Sylhet', '1993-04-11', 33),
+  ('5454433338', 'Abdul Jobbar', 'SUST, Sylhet', '1983-01-23', 56);
 
+```
+
+#### Inserting Authority Data
+```code
+
+INSERT INTO authority (authority_name, authority_job_title, authority_signature, authority_id)
+VALUES
+    ('Dr. Md. Alomgir Kabir', 'Proctor', 'A Kabir', '4291923818'),
+    ('Md. Israt Ibn Ismail', 'Proctor', 'Ismail', '4291923857'),
+    ('Md. Abu Hena Pohil', 'Proctor', 'Pohil', '4291923856');
+```
+
+#### Inserting Permission Data
+```code
+
+INSERT INTO permission(permission_area, permission_date,expiration_date, permission_agreement, autorickshaw_number, authority_id)
+VALUES
+  ('SUST, Sylhet', '2020-07-08', '2023-11-11', 'agreed', 40, '4291923818'),
+  ('SUST, Sylhet', '2019-05-30', '2023-08-07', 'agreed', 18, '4291923857'),
+  ('SUST, Sylhet', '2019-05-05', '2023-10-16', 'agreed', 7, '4291923818'),
+  ('SUST, Sylhet', '2021-05-09', '2023-11-11', 'agreed', 51, '4291923856'),
+  ('SUST, Sylhet', '2020-07-12', '2023-10-08', 'agreed', 47, '4291923856'),
+  ('SUST, Sylhet', '2019-10-13', '2023-08-27', 'agreed', 32, '4291923857'),
+  ('SUST, Sylhet', '2019-05-30', '2023-12-11', 'agreed', 52, '4291923818'),
+  ('SUST, Sylhet', '2019-05-12', '2023-05-31', 'agreed', 17, '4291923856'),
+  ('SUST, Sylhet', '2019-05-30', '2023-11-19', 'agreed', 33, '4291923856'),
+  ('SUST, Sylhet', '2020-06-17', '2023-12-10', 'agreed', 56, '4291923856'),
+  ('SUST, Sylhet', '2019-05-09', '2024-01-18', 'agreed', 30, '4291923857');
+```
+
+#### Inserting Manager Data
+```code
+
+INSERT INTO `manager`(`manager_nid`, `manager_name`, `manager_address`, `manager_date_of_birth`)
+VALUES
+  ('9474232550', 'Misbah Ullah', 'SUST, Sylhet', '1980-01-01'),
+  ('3762324990', 'Wasif Ullah', 'SUST, Sylhet', '1990-01-01'),
+  ('5299322300', 'Zaman Chowdhury', 'SUST, Sylhet', '1985-01-01');
 
 ```
 
@@ -145,5 +206,12 @@ ORDER BY  owner_date_of_birth;
 
 ```
 
+#### Query - 2 : AutoRickshaw details of owner Name Md.Selim Reza
+```code
 
+SELECT *
+FROM owner
+ORDER BY  owner_date_of_birth;
+
+```
 
