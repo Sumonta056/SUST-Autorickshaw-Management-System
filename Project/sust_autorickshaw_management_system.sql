@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 08:26 PM
+-- Generation Time: May 23, 2023 at 09:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -245,7 +245,8 @@ INSERT INTO `serial` (`serial_number`, `serial_time`, `serial_date`, `serial_sta
 (40, '08:30:00', '2023-04-03', 'Absent', 17, 71),
 (31, '10:30:00', '2023-04-23', 'Present', 33, 72),
 (64, '12:55:00', '2023-04-23', 'Present', 56, 71),
-(65, '15:30:00', '2023-04-23', 'Absent', 30, 2);
+(65, '15:30:00', '2023-04-23', 'Absent', 30, 2),
+(19, '12:00:00', '2023-04-21', 'Absent', 40, 54);
 
 --
 -- Indexes for dumped tables

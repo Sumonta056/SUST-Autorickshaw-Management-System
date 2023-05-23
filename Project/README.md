@@ -228,6 +228,7 @@ VALUES
   (31, '10:30:00', '2023-04-23', 'Present', 33, 72),
   (64, '12:55:00', '2023-04-23', 'Present', 56, 71),
   (65, '15:30:00', '2023-04-23', 'Absent', 30, 2);
+  (19, '12:00:00', '2023-04-21', 'Absent', 40, 54);
 
 ```
 
@@ -288,7 +289,21 @@ owner.owner_name = 'Md.Selim Reza' ;
 
 ```
 
+#### Query - 7 : Find which owner has how many autorickshaw
+```code
+SELECT owner.owner_name , COUNT(autorickshaw.autorickshaw_number) as HasAutoRickshaw
+FROM owner , autorickshaw
+WHERE owner.owner_nid = autorickshaw.owner_nid 
+GROUP BY owner.owner_name
+```
 
+#### Query - 8 : How many autorickshaw went to area = 'Bangabandhu Hall' and date = '2023-04-21'
+```code
+SELECT COUNT(*) AS autorickshaw_count
+FROM Serial s ,Round r
+WHERE s.round_number = r.round_number and  r.round_area = 'Bangabandhu Hall' AND r.round_date = '2023-04-21';
+
+```
 
 
 
