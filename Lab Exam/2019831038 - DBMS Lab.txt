@@ -1,0 +1,7 @@
+1) Show a list of driver.
+Ans:   
+     SELECT * FROM `driver`;
+
+2) Update driver's list set Khulna where location is Sylhet.
+Ans: 
+    UPDATE `driver` SET driver_address = 'Khulna' WHERE driver_address = 'Sylhet';

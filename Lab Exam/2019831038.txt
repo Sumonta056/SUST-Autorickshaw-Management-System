@@ -1,0 +1,5 @@
+1) Show a list of driver.
+Ans:   
+    SELECT * FROM `driver`;
+
+2) Update driver's list set Khulna where location is Sylhet.

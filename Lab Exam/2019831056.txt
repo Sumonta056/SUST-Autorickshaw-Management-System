@@ -1,0 +1,4 @@
+ALTER TABLE `driver` ADD `driver_texText` INT NULL;
+
+UPDATE driver
+set driver_texText = 5 ;
