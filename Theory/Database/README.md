@@ -37,8 +37,10 @@ create table Autorickshaw(
 create table Driver(
     driver_nid varchar(30) PRIMARY key,
     driver_name varchar(30),
+   	driver_date_of_birth date,
+    driver_houseNo varchar(40),
+   	driver_postalCode varchar(40),
     driver_address varchar(40),
-    driver_date_of_birth date,
     
     autorickshaw_number int,
     foreign key(autorickshaw_number) REFERENCES autorickshaw(autorickshaw_number)
