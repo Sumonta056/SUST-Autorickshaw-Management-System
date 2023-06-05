@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 05, 2023 at 01:46 AM
+-- Generation Time: Jun 05, 2023 at 02:13 AM
 -- Server version: 10.5.20-MariaDB
 -- PHP Version: 7.3.33
 
@@ -32,17 +32,8 @@ CREATE TABLE `autorickshaw` (
   `autorickshaw_company` varchar(30) DEFAULT NULL,
   `autorickshaw_model` varchar(30) DEFAULT NULL,
   `autorickshaw_color` varchar(20) DEFAULT NULL,
-  `owner_nid` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `autorickshaw`
---
-
-INSERT INTO `autorickshaw` (`autorickshaw_number`, `autorickshaw_company`, `autorickshaw_model`, `autorickshaw_color`, `owner_nid`) VALUES
-(13, 'Joy Bangla Enterpise', '2011', 'Black', '2019831056'),
-(30, NULL, '2093', 'Blue', '2019831056'),
-(23, 'Momota Enterpise', '2341', 'Red', '2019831056');
+  `owner_nid` varchar(17) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -58,15 +49,7 @@ CREATE TABLE `driver` (
   `driver_postalCode` varchar(40) DEFAULT NULL,
   `driver_address` varchar(40) DEFAULT NULL,
   `autorickshaw_number` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `driver`
---
-
-INSERT INTO `driver` (`driver_nid`, `driver_name`, `driver_date_of_birth`, `driver_houseNo`, `driver_postalCode`, `driver_address`, `autorickshaw_number`) VALUES
-('201978312', 'Abdul Ali', '1992-11-12', '42', '1400', 'Comilla', 13),
-('123424124544', 'Rafi Ali', '2000-10-11', '62', '2000', 'Khulna', 13);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -101,21 +84,18 @@ INSERT INTO `manager` (`manager_nid`, `manager_name`, `manager_date_of_birth`, `
 CREATE TABLE `owner` (
   `owner_nid` varchar(17) NOT NULL,
   `owner_name` varchar(30) DEFAULT NULL,
-  `owner_date_of_birth` varchar(20) DEFAULT NULL,
+  `owner_date_of_birth` date DEFAULT NULL,
   `owner_houseNo` varchar(40) DEFAULT NULL,
   `owner_postalCode` varchar(40) DEFAULT NULL,
   `owner_address` varchar(40) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `owner`
 --
 
 INSERT INTO `owner` (`owner_nid`, `owner_name`, `owner_date_of_birth`, `owner_houseNo`, `owner_postalCode`, `owner_address`) VALUES
-('1234567890', NULL, NULL, NULL, NULL, NULL),
-('1390142552543', 'Ali Baba', '2000-10-13', '45', '3000', 'Sylhet'),
-('2019831056', 'Sumonta Saha', '2000-04-11', '24', '1400', 'Dhaka'),
-('3322222222', 'dggsgsdgsg', '1999-09-11', '9898', '3100', 'dgfdf');
+('21424122421', 'Ali Baba', '1990-12-01', '10', '1200', 'Dhaka');
 
 -- --------------------------------------------------------
 
@@ -142,11 +122,26 @@ INSERT INTO `user` (`id`, `name`, `email`, `password_hash`) VALUES
 (8, 'GG', 'alibaba@gmail.com', '$2y$10$SnrmCc72zWaqJx.ewiS1iOHzVvwpdhtAaDziBeWl.NFtYUvED.tLi'),
 (9, 'Mridula', 'prom@gmail.com', '$2y$10$w7ZU6kBl6Ggth5DBvPVPgOq4orojxs680B/gKe0B0cLL4vQPdqIg6'),
 (10, 'Mridul', 'sumonta056@gmail.com', '$2y$10$PPMEj7JlhL2QGYbaxcJLSO4ExGshRk54M9DBuoD3u5KkREP6IGCbS'),
-(11, 'Promiii', 'promm@gmail.com', '$2y$10$dlmh37vussoi1SYgE8E54OP753hhgrB.9dKl10f0sDKv9mB.LLGVu');
+(11, 'Promiii', 'promm@gmail.com', '$2y$10$dlmh37vussoi1SYgE8E54OP753hhgrB.9dKl10f0sDKv9mB.LLGVu'),
+(12, 'Gg', 'Gg@gmail.com', '$2y$10$H/DcTB5dmwFQzNlmwA4Tv.85/EF5m/XtBcVeTKfMzyGcaZ/3ZEr.y');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `autorickshaw`
+--
+ALTER TABLE `autorickshaw`
+  ADD PRIMARY KEY (`autorickshaw_number`),
+  ADD KEY `owner_nid` (`owner_nid`);
+
+--
+-- Indexes for table `driver`
+--
+ALTER TABLE `driver`
+  ADD PRIMARY KEY (`driver_nid`),
+  ADD KEY `autorickshaw_number` (`autorickshaw_number`);
 
 --
 -- Indexes for table `owner`
@@ -169,7 +164,23 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `autorickshaw`
+--
+ALTER TABLE `autorickshaw`
+  ADD CONSTRAINT `autorickshaw_ibfk_1` FOREIGN KEY (`owner_nid`) REFERENCES `owner` (`owner_nid`);
+
+--
+-- Constraints for table `driver`
+--
+ALTER TABLE `driver`
+  ADD CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`autorickshaw_number`) REFERENCES `autorickshaw` (`autorickshaw_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

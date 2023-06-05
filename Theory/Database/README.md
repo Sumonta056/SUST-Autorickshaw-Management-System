@@ -8,7 +8,7 @@ CREATE DATABASE SUST_AutoRickshaw_Management_System ;
 
 #### Creating Owner Table
 ```code
-create table Owner(
+create table owner(
     owner_nid varchar(17) PRIMARY key,
     owner_name varchar(30),
   
@@ -21,7 +21,7 @@ create table Owner(
 
 #### Creating Autorickshaw Table
 ```code
-create table Autorickshaw(
+create table autorickshaw(
     autorickshaw_number int primary key,
     autorickshaw_company varchar(30),
     autorickshaw_model varchar(30),
@@ -34,7 +34,7 @@ create table Autorickshaw(
 
 #### Creating Driver Table
 ```code
-create table Driver(
+create table driver(
     driver_nid varchar(30) PRIMARY key,
     driver_name varchar(30),
    	driver_date_of_birth date,
@@ -49,7 +49,7 @@ create table Driver(
 
 #### Creating Authority Table
 ```code
-create table Authority(
+create table authority(
     authority_name varchar(30),
     authority_job_title varchar(30),
     authority_signature varchar(10),
@@ -58,7 +58,7 @@ create table Authority(
 ```
 #### Creating Permission Table
 ```code
-create table Permission(
+create table permission(
     permission_area varchar(20),
     permission_date date,
     expiration_date date,
@@ -72,7 +72,7 @@ create table Permission(
 ```
 #### Creating Manager Table
 ```code
-create table Manager(
+create table manager(
     manager_nid varchar(15) PRIMARY key,
     manager_name varchar(30),
     manager_address varchar(40),
@@ -82,7 +82,7 @@ create table Manager(
 
 #### Creating Round Table
 ```code
-create table Round(
+create table round(
     round_number int PRIMARY KEY,
     round_date date,
     start_time time,
@@ -95,7 +95,7 @@ create table Round(
 ```
 #### Creating Serial Table
 ```code
-create table Serial(
+create table serial(
     serial_number INT,
     serial_time time, 
     serial_date date,

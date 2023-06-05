@@ -10,4 +10,15 @@ create table Driver(
     foreign key(autorickshaw_number) REFERENCES autorickshaw(autorickshaw_number)
 );
 
+create table manager(
+    
+    manager_nid varchar(30) PRIMARY key,
+    manager_name varchar(30),
+   	manager_date_of_birth date,
+    manager_houseNo varchar(40),
+   	manager_postalCode varchar(40),
+    manager_address varchar(40)
+    
+
+);
 
