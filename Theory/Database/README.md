@@ -9,10 +9,13 @@ CREATE DATABASE SUST_AutoRickshaw_Management_System ;
 #### Creating Owner Table
 ```code
 create table Owner(
-    owner_nid varchar(15) PRIMARY key,
+    owner_nid varchar(17) PRIMARY key,
     owner_name varchar(30),
-    owner_address varchar(40),
-    owner_date_of_birth date
+  
+    owner_date_of_birth date,
+    owner_houseNo varchar(40),
+    owner_postalCode varchar(40),
+    owner_address varchar(40)
 );
 ```
 
