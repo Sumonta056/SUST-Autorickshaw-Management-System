@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    
+    <title>Sign in || Sign up from</title>
+     <!-- font awesome icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/js/validation.js" defer></script>
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="process-signup.php" method="post" id="signup" novalidate>
+                <h1>নতুন একাউন্ট তৈরি করুন</h1>
+            
+                <div class="infield">
+                    
+                    <input type="text" placeholder="নাম" id="name" name = "name"/>
+                
+                </div>
+                <div class="infield">
+                    
+                    <input type="email" placeholder="ইমেইল" id="email" name="email"/>
+                </div>
+                <div class="infield">
+                    
+                    <input type="password" placeholder="পাসওয়ার্ড" id="password" name="password"/>
+                </div>
+                <div class="infield">
+            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="পুনরায় পাসওয়ার্ড দিন">
+                </div>
+                <button>রেজিস্ট্রেশন</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            
+            <form action="login.php" method="POST">
+
+                <h1>লগইন করুন</h1>
+                
+                <div class="infield">
+                    <input type="email" id="email" name="email" placeholder="ইমেইল"/>
+                </div>
+                <div class="infield">
+                    <input type="password" id="password" name="password" placeholder="পাসওয়ার্ড" /> 
+                </div>
+                <a href="#" class="forgot">পাসওয়ার্ড ভুলে গিয়েছেন ?</a>
+                <button>লগইন</button>
+            </form>
+        </div>
+        <div class="overlay-container" id="overlayCon">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <div class="background-image"></div>
+                    <h1>শাবিপ্রবি অটোরিকশা ম্যানেজমেন্ট সিস্টেম<br><br></h1> 
+                    <button>লগইন করুন</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <div class="background-image"></div>
+                    <h1>শাবিপ্রবি অটোরিকশা ম্যানেজমেন্ট সিস্টেম<br><br></h1>
+                    <button>রেজিস্ট্রেশন করুন</button>
+                </div>
+            </div>
+            <button id="overlayBtn"></button>
+        </div>
+    </div>
+
+    <footer>
+        <mark>Learn more on <a href="https://github.com/Sumonta056/SUST-Autorickshaw-Management-System">Github</a></mark>
+    </footer>
+    
+    <!-- js code -->
+    <script>
+        const container = document.getElementById('container');
+        const overlayCon = document.getElementById('overlayCon');
+        const overlayBtn = document.getElementById('overlayBtn');
+
+        overlayBtn.addEventListener('click', ()=>{
+            container.classList.toggle('right-panel-active');
+
+            overlayBtn.classList.remove('btnScaled');
+            window.requestAnimationFrame(()=>{
+                overlayBtn.classList.add('btnScaled');
+            })
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
