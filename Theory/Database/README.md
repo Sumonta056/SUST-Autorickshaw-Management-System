@@ -53,7 +53,7 @@ create table authority(
     authority_name varchar(30),
     authority_job_title varchar(30),
     authority_signature varchar(10),
-    authority_id varchar(15) PRIMARY KEY
+    authority_nid varchar(17) PRIMARY KEY
 );
 ```
 #### Creating Permission Table
